@@ -1,0 +1,1 @@
+C:\Repos\Unity\VirtualPet_V2\Library\PramData\AndroidApplicationController\Cache\com.HXI.VirtualPetV2\gradle-project\unityLibrary\build\intermediates\cxx\Debug\3g3l5t3f\obj\arm64-v8a

@@ -1,0 +1,5 @@
+C:/Repos/Unity/VirtualPet_V2/.utmp/Debug/3g3l5t3f/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Repos/Unity/VirtualPet_V2/.utmp/Debug/3g3l5t3f/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Repos/Unity/VirtualPet_V2/.utmp/Debug/3g3l5t3f/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Repos/Unity/VirtualPet_V2/.utmp/Debug/3g3l5t3f/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Repos/Unity/VirtualPet_V2/.utmp/Debug/3g3l5t3f/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
