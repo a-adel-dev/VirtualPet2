@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+
 
 public class DogAnimator : MonoBehaviour
 {
@@ -11,22 +11,25 @@ public class DogAnimator : MonoBehaviour
     public float velocityX { get; set; }
     public float velocityZ { get; set; }
     
-    
-    
-    
-    private static readonly Dictionary<DogAnimationState, string> AnimationMappings = new()
+    private readonly Dictionary<DogAnimationState, string> AnimationMappings = new()
     {
         { DogAnimationState.Idle, "Idle" },
         { DogAnimationState.Bark, "Attack" },
         { DogAnimationState.TurnAround, "TurnAround" },
         { DogAnimationState.Jump, "Jump" },
         { DogAnimationState.Move, "Move" },
+        { DogAnimationState.Sit, "Sit"},
         // Add more mappings here
     };
 
-    private void Start()
+    private void Awake()
     {
         _animator = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+       
         
 
         // StartCoroutine(TestMethod());
@@ -54,13 +57,22 @@ public class DogAnimator : MonoBehaviour
         ChangeAnimationState(DogAnimationState.Jump);
     }
 
-    private void ChangeAnimationState(DogAnimationState newState, float crossFade=0.2f)
+    public void ChangeAnimationState(DogAnimationState newState)
     {
         if (_currentDogAnimationState != newState)
         {
             _currentDogAnimationState = newState;
-            // _animator.CrossFade(AnimationMappings[newState], crossFade);
+            Debug.Log("Changing animation state to " + AnimationMappings[newState]);
             _animator.Play(AnimationMappings[newState]);
+        }
+    }
+
+    public void EaseIntoAnimation(DogAnimationState newState, float crossFade = 0.2f)
+    {
+        if (_currentDogAnimationState != newState)
+        {
+            _currentDogAnimationState = newState;
+            _animator.CrossFade(AnimationMappings[newState], crossFade);
         }
     }
 }

@@ -1,7 +1,7 @@
 public enum DogAnimationState
 {
     Default =0 ,
-    Sitting =1,
+    Sit =1,
     Move = 2,
     Jump = 3,
     TurnAround = 4,

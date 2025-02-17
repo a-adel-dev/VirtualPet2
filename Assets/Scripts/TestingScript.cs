@@ -7,6 +7,6 @@ public class TestingScript : MonoBehaviour
 
     private void Start()
     {
-        promptUIController.SetPromptText("Hello World");
+        // promptUIController.SetPromptText("Hello World");
     }
 }

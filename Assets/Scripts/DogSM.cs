@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class DogSM : MonoBehaviour
 {
     NavMeshAgent _navMeshAgent;
-    [SerializeField] private Transform target;
+    private Transform _target;
     [SerializeField] private DogAnimator dogAnimator;
 
     private void Start()
@@ -16,8 +16,14 @@ public class DogSM : MonoBehaviour
     
     private void Update()
     {
-        _navMeshAgent.SetDestination(new Vector3(target.position.x, 0f, target.position.z));
+        if (_target == null) return;
+        _navMeshAgent.SetDestination(new Vector3(_target.position.x, 0f, _target.position.z));
         dogAnimator.velocityX = _navMeshAgent.velocity.x;
         dogAnimator.velocityZ = _navMeshAgent.velocity.z;
+    }
+    
+    public void SetTarget(Transform target)
+    {
+        _target = target;
     }
 }
