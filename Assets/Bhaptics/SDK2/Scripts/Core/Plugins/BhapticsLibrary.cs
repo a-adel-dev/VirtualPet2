@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
@@ -190,45 +189,6 @@ namespace Bhaptics.SDK2
         }
 
         /// <summary>
-        /// Play the haptic event. It is the most basic way to call a haptic event. It has the lowest overhead of any haptic event-calling function.
-        /// <para>eventId refers to the name of an event as defined on <a href="https://developer.bhaptics.com">developer.bhaptics.com</a></para>
-        /// </summary>
-        /// <param name="eventId">Name of haptic event which you want to play.</param>
-        /// <returns>requestId. You can use the requestId to stop the haptic. It returns -1 if the return fails.</returns>
-        public static int Play(string eventId)
-        {
-            if (!isAvailable)
-            {
-                return -1;
-            }
-
-            if (eventId == null || eventId.Equals(string.Empty))
-            {
-                return -1;
-            }
-
-            if (enableUniversal)
-            {
-                _client.Play(eventId);
-            }
-
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                if (android != null)
-                {
-                    return android.Play(eventId);
-                }
-
-                return -1;
-            }
-#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-            return bhaptics_library.play(eventId);
-#else
-            return -1;
-#endif
-        }
-
-        /// <summary>
         /// Play haptic event, with adjusting the strength, duration, and direction of the haptic.
         /// <para>eventId refers to the name of an event as defined on <a href="https://developer.bhaptics.com">developer.bhaptics.com</a></para>
         /// </summary>
@@ -240,36 +200,7 @@ namespace Bhaptics.SDK2
         /// <returns>requestId. You can use the requestId to stop the haptic. It returns -1 if the return fails.</returns>
         public static int PlayParam(string eventId, float intensity = 1.0f, float duration = 1.0f, float angleX = 0.0f, float offsetY = 0.0f)
         {
-            if (!isAvailable)
-            {
-                return -1;
-            }
-
-            if (eventId == null || eventId.Equals(string.Empty))
-            {
-                return -1;
-            }
-
-
-            if (enableUniversal)
-            {
-                _client.Play(eventId, intensity, duration, angleX, offsetY);
-            }
-
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                if (android != null)
-                {
-                    return android.PlayParam(eventId, intensity, duration, angleX, offsetY);
-                }
-
-                return -1;
-            }
-#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-            return bhaptics_library.playPosParam(eventId, 0, intensity, duration, angleX, offsetY);
-#else
-            return -1;
-#endif
+            return Play(eventId, 0, intensity, duration, angleX, offsetY);
         }
 
         /// <summary>
@@ -283,6 +214,62 @@ namespace Bhaptics.SDK2
         public static int PlayAngle(string eventId, float angleX, float offsetY)
         {
             return PlayParam(eventId, 1.0f, 1.0f, angleX, offsetY);
+        }
+
+
+        /// <summary>
+        /// Play haptic event, with adjusting the strength, duration, and direction of the haptic.
+        /// <para>eventId refers to the name of an event as defined on <a href="https://developer.bhaptics.com">developer.bhaptics.com</a></para>
+        /// </summary>
+        /// <param name="eventId">Name of haptic event which you want to play.</param>
+        /// <param name="startMillis">[windows/android Only]The delay in milliseconds before the haptic event starts playing. The haptic will begin after this time has elapsed.</param>
+        /// <param name="intensity">The haptic intensity is multiplied by this value.</param>
+        /// <param name="duration">The haptic duration is multiplied by this value.</param>
+        /// <param name="angleX">Rotate haptic counterclockwise around the global Vector3.up. Valid range is: [0.0f - 360.0f]</param>
+        /// <param name="offsetY">Move haptic up or down. Valid range is: [-0.5f - 0.5f]</param>
+        /// <returns>requestId. You can use the requestId to stop the haptic. It returns -1 if the return fails.</returns>
+        public static int Play(string eventId, int startMillis = 0, float intensity = 1f, float duration = 1.0f, float angleX = 0.0f, float offsetY = 0.0f)
+        {
+            if (!isAvailable)
+            {
+                return -1;
+            }
+
+            if (eventId == null || eventId.Equals(string.Empty))
+            {
+                return -1;
+            }
+
+            if (startMillis < 0)
+            {
+                return -1;
+            }
+            int requestId = UnityEngine.Random.Range(1, int.MaxValue);
+
+            if (enableUniversal)
+            {
+                _client.Play(eventId, requestId, startMillis, intensity, duration, angleX, offsetY);
+            }
+
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                if (android != null)
+                {
+                    return android.Play(eventId, requestId, startMillis, intensity, duration, angleX, offsetY);
+                }
+
+                return -1;
+            }
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+            return bhaptics_library.playWithStartTime(eventId, requestId, startMillis, intensity, duration, angleX, offsetY);
+#else
+            if (enableUniversal)
+            {
+                return requestId;
+            }
+
+            return -1;
+#endif
         }
 
         /// <summary>
@@ -308,24 +295,31 @@ namespace Bhaptics.SDK2
             {
                 return -1;
             }
-
+            
+            int requestId = UnityEngine.Random.Range(1, int.MaxValue);
+            
             if (enableUniversal)
             {
-                _client.PlayLoop(eventId, intensity, duration, angleX, offsetY, interval, maxCount);
+                _client.PlayLoop(eventId, requestId, intensity, duration, angleX, offsetY, interval, maxCount);
             }
 
             if (Application.platform == RuntimePlatform.Android)
             {
                 if (android != null)
                 {
-                    return android.PlayLoop(eventId, intensity, duration, angleX, offsetY, interval, maxCount);
+                    return android.PlayLoop(eventId, requestId, intensity, duration, angleX, offsetY, interval, maxCount);
                 }
 
                 return -1;
             }
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-            return bhaptics_library.playLoop(eventId, intensity, duration, angleX, offsetY, interval, maxCount);
+            return bhaptics_library.playLoop(eventId, requestId, intensity, duration, angleX, offsetY, interval, maxCount);
 #else
+            if (enableUniversal)
+            {
+                return requestId;
+            }
+
             return -1;
 #endif
         }
@@ -361,10 +355,12 @@ namespace Bhaptics.SDK2
             {
                 return -1;
             }
-
+            
+            int requestId = UnityEngine.Random.Range(1, int.MaxValue);
+            
             if (enableUniversal)
             {
-                _client.PlayMotors(position, motors, durationMillis);
+                _client.PlayMotors(position, requestId, motors, durationMillis);
             }
 
             if (Application.platform == RuntimePlatform.Android)
@@ -377,8 +373,13 @@ namespace Bhaptics.SDK2
                 return -1;
             }
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-            return bhaptics_library.playDot(position, durationMillis, motors, motors.Length);
+            return bhaptics_library.playDot(requestId, position, durationMillis, motors, motors.Length);
 #else
+            if (enableUniversal)
+            {
+                return requestId;
+            }
+
             return -1;
 #endif
         }
@@ -403,9 +404,9 @@ namespace Bhaptics.SDK2
             int[] devices;
             switch (position)
             {
-                case PositionType.Vest: devices = new int[40]; break;
-                case PositionType.ForearmL: devices = new int[6]; break;
-                case PositionType.ForearmR: devices = new int[6]; break;
+                case PositionType.Vest: devices = new int[32]; break;
+                case PositionType.ForearmL: devices = new int[3]; break;
+                case PositionType.ForearmR: devices = new int[3]; break;
                 case PositionType.Head: devices = new int[4]; break;
                 case PositionType.HandL: devices = new int[3]; break;
                 case PositionType.HandR: devices = new int[3]; break;
@@ -474,10 +475,12 @@ namespace Bhaptics.SDK2
             {
                 shapeVals[i] = (int)shapeValues[i];
             }
+            
+            int requestId = UnityEngine.Random.Range(1, int.MaxValue);
 
             if (enableUniversal)
             {
-                _client.PlayWaveform((int)positionType, motorValues, playTimes, shapeVals);
+                _client.PlayWaveform((int)positionType, requestId, motorValues, playTimes, shapeVals);
             }
 
             if (Application.platform == RuntimePlatform.Android)
@@ -489,8 +492,13 @@ namespace Bhaptics.SDK2
                 return -1;
             }
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-            return bhaptics_library.playWaveform((int)positionType, motorValues, playTimes, shapeVals, 1, 6);
+            return bhaptics_library.playWaveform(requestId, (int)positionType, motorValues, playTimes, shapeVals, 1, 6);
 #else
+            if (enableUniversal)
+            {
+                return requestId;
+            }
+
             return -1;
 #endif
         }
@@ -518,10 +526,12 @@ namespace Bhaptics.SDK2
             {
                 return -1;
             }
+            
+            int requestId = UnityEngine.Random.Range(1, int.MaxValue);
 
             if (enableUniversal)
             {
-                _client.PlayPath(position, xValues, yValues, intensityValues, duration);
+                _client.PlayPath(position, requestId, xValues, yValues, intensityValues, duration);
             }
 
             if (Application.platform == RuntimePlatform.Android)
@@ -534,11 +544,92 @@ namespace Bhaptics.SDK2
                 return -1;
             }
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-            return bhaptics_library.playPath(position, duration, xValues, yValues, intensityValues, xValues.Count());
+            return bhaptics_library.playPath(requestId, position, duration, xValues, yValues, intensityValues, xValues.Count());
 #else
+            if (enableUniversal)
+            {
+                return requestId;
+            }
+
             return -1;
 #endif
         }
+        
+        /* TODO
+         
+        /// <summary>
+        /// Pauses the haptic event. Use PausePlay(string eventId) to pause a specific haptic event.The paused event can be resumed from the point it was paused using ResumePlay(string eventId).
+        /// <para>eventId refers to the name of an event as defined on <a href="https://developer.bhaptics.com">developer.bhaptics.com</a></para>
+        /// </summary>
+        /// <param name="eventId">Name of haptic event which you want to pause.</param>
+        public static void PauseByEventId(string eventId)
+        {
+            if (!isAvailable)
+            {
+                return;
+            }
+
+            if (eventId == null || eventId.Equals(string.Empty))
+            {
+                return;
+            }
+
+            if (enableUniversal)
+            {
+                _client.PausePlay(eventId);
+            }
+
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                if (android != null)
+                {
+                    android.Pause(eventId);
+                }
+
+                return;
+            }
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+            bhaptics_library.pause(eventId);
+#endif
+        }
+
+        /// <summary>
+        /// Resumes the paused haptic event. Use ResumePlay(string eventId) to restart a haptic event from the point it was paused with PausePlay(string eventId).
+        /// <para>eventId refers to the name of an event as defined on <a href="https://developer.bhaptics.com">developer.bhaptics.com</a></para>
+        /// </summary>
+        /// <param name="eventId">Name of haptic event which you want to resume.</param>
+        public static void ResumeByEventId(string eventId)
+        {
+            if (!isAvailable)
+            {
+                return;
+            }
+
+            if (eventId == null || eventId.Equals(string.Empty))
+            {
+                return;
+            }
+
+            if (enableUniversal)
+            {
+                _client.ResumePlay(eventId);
+            }
+
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                if (android != null)
+                {
+                    android.Resume(eventId);
+                }
+
+                return;
+            }
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+            bhaptics_library.resume(eventId);
+#endif
+        }
+        
+        */
 
         /// <summary>
         /// Stop the haptic event by Event ID.

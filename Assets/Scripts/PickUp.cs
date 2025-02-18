@@ -56,14 +56,14 @@ public class PickUp : MonoBehaviour
         else if(backToStartPos){
             MoveToTarget(startPos);
             if(Vector3.Distance(transform.position, startPos.transform.position) < 0.05f){
-                Debug.Log("arrived at start pos");
+                // Debug.Log("arrived at start pos");
                 animator.SetBool("pickup", false);
                 backToStartPos = false;
                 RotateToDirection(startPos);
             }
         }
         else if(happy){
-            Debug.Log("trigger happy");
+            // Debug.Log("trigger happy");
             HappyInteraction();
             happy = false;
         }
@@ -75,7 +75,7 @@ public class PickUp : MonoBehaviour
 
     void OnThrow(SelectExitEventArgs args)
     {
-        Debug.Log("Ball thrown");
+        // Debug.Log("Ball thrown");
 
         StartCoroutine(WaitForBallToStop());
     }
@@ -85,7 +85,7 @@ public class PickUp : MonoBehaviour
     void OnDestroy(){
         if(grabInteractable != null){
             grabInteractable.selectExited.RemoveListener(OnThrow);
-            Debug.Log("Listener removed from grabInteractable.");
+            // Debug.Log("Listener removed from grabInteractable.");
         }
     }
 
@@ -98,13 +98,13 @@ public class PickUp : MonoBehaviour
             elapsedTime += checkInterval;
         }
 
-        Debug.Log("Ball has stopped!");
+        // Debug.Log("Ball has stopped!");
         Vector3 finalPosition = ball.transform.position;
-        Debug.Log("Final position: " + finalPosition);
+        // Debug.Log("Final position: " + finalPosition);
         float distance = Vector3.Distance(ball.transform.position, startPos.transform.position);
-        Debug.Log("Distance: " + distance);
+        // Debug.Log("Distance: " + distance);
         if (distance < 1.5){
-            Debug.Log("Distance less than 1m");
+            // Debug.Log("Distance less than 1m");
             targetRigidbody.isKinematic = true;
             ball.transform.position = SpawnPos.position;
             yield return new WaitForFixedUpdate();
@@ -115,7 +115,7 @@ public class PickUp : MonoBehaviour
                 rethrowUI.SetActive(true);
             }
         }else{
-            Debug.Log("Distance more than 2m");
+            // Debug.Log("Distance more than 2m");
             ballLanded = true;
             // StartCoroutine(triggerPickup());
         }
@@ -127,9 +127,9 @@ public class PickUp : MonoBehaviour
     // }
 
     void OnTriggerEnter(Collider collider){
-        Debug.Log("sth touch dog");
+        // Debug.Log("sth touch dog");
         if(collider.gameObject.CompareTag("ball") && ballLanded){
-            Debug.Log("ball is within reach");
+            // Debug.Log("ball is within reach");
             ballLanded = false;
 
             // stop ball motion
@@ -149,7 +149,7 @@ public class PickUp : MonoBehaviour
 
     void RotateToDirection(GameObject destination){
         if (destination != null){
-            Debug.Log("start rotating...");
+            // Debug.Log("start rotating...");
             Vector3 targetDirection = destination.transform.forward;
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation,targetRotation, rotationSpeed);
@@ -169,13 +169,13 @@ public class PickUp : MonoBehaviour
     }
 
     void DetachBallFromDog(){
-        Debug.Log($"Detaching from dog mouth...{Time.time}");
+        // Debug.Log($"Detaching from dog mouth...{Time.time}");
         if(sequenceHandler.GetCurrentStateIndex() < 5){
             attachToMouth.DetachBallFromMouth();
             ball.SetActive(false);
             // Destroy(ball);
         }else{
-            Debug.Log("Detaching BONE from dog mouth...");
+            // Debug.Log("Detaching BONE from dog mouth...");
             attachToMouth.AttachBoneToSocket();
         }
 
@@ -217,7 +217,7 @@ public class PickUp : MonoBehaviour
             yield return null; // Wait for the next frame
         }
 
-        Debug.Log("Animation finished!");
+        // Debug.Log("Animation finished!");
         animator.SetBool("putdown", false);
 
         HappyInteraction();
@@ -229,7 +229,7 @@ public class PickUp : MonoBehaviour
 
     public void Barking(){
         if(!audioSource.isPlaying){
-            Debug.Log("Play Barking");
+            // Debug.Log("Play Barking");
             audioSource.Play();
         }
     }

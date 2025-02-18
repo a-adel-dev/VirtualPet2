@@ -34,18 +34,18 @@ public class GloveController : MonoBehaviour
             // Right hand dominance
             if(rightHand){
                 BhapticsLibrary.Play("touch_right");
-                Debug.Log("touch_right");
+                // Debug.Log("touch_right");
             }
             // Left hand dominance
             else{
                 BhapticsLibrary.Play("touch_left");
-                Debug.Log("touch_left");
+                // Debug.Log("touch_left");
             }
         }
     }
 
     public void StopHapticFeedback(){
-        Debug.Log("Should stop");
+        // Debug.Log("Should stop");
         BhapticsLibrary.StopAll();
         // BhapticsManager.Stop("touch");
 

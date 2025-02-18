@@ -29,7 +29,7 @@ public class AttachToMouth : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("Mouth touch");
+        // Debug.Log("Mouth touch");
         if(collider.gameObject.CompareTag("ball") && !touchMouth)
         {
             touchMouth = true;
@@ -41,7 +41,7 @@ public class AttachToMouth : MonoBehaviour
             grabbed = true;
             touchMouth = true;
             socketParent.SetActive(false);
-            Debug.Log("Bone touches mouth");
+            // Debug.Log("Bone touches mouth");
         }
     }
 
@@ -55,7 +55,7 @@ public class AttachToMouth : MonoBehaviour
     }
 
     public void AttachBoneToSocket(){
-        Debug.Log("attack bone to socket ATM");
+        // Debug.Log("attack bone to socket ATM");
         socketParent.SetActive(true);
         touchMouth=false;
         gameObject.transform.position = socket.position;

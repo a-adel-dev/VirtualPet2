@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Bhaptics.SDK2.Universal
 {
@@ -11,8 +12,11 @@ namespace Bhaptics.SDK2.Universal
         public const string ServerDeviceListMessage = "ServerDeviceListMessage";
 
         public const string SdkPlay = "SdkPlay";
+        public const string SdkPlayWithStartTime = "SdkPlayWithStartTime";
         public const string SdkPing = "SdkPing";
         public const string SdkPingAll = "SdkPingAll";
+        public const string SdkResume = "SdkResume";
+        public const string SdkPause = "SdkPause";
         public const string SdkPingToServer = "SdkPingToServer";
         public const string SdkSwapPosition = "SdkSwapPosition";
         public const string SdkPlayDotMode = "SdkPlayDotMode";
@@ -33,10 +37,22 @@ namespace Bhaptics.SDK2.Universal
     {
         public string eventName;
         public int requestId;
+        public int startMillis = 0;
         public float intensity = 1f;
         public float duration = 1f;
         public float offsetAngleX = 0f;
         public float offsetY = 0f;
+    }
+    
+    [Serializable]
+    public class PauseMessage
+    {
+        public string eventName;
+    }
+    [Serializable]
+    public class ResumeMessage
+    {
+        public string eventName;
     }
 
     [Serializable]
@@ -87,6 +103,7 @@ namespace Bhaptics.SDK2.Universal
     {
         public string sdkApiKey;
         public string applicationId;
+        public int version;
     }
 
     [Serializable]
@@ -155,6 +172,7 @@ namespace Bhaptics.SDK2.Universal
                 {
                     applicationId = appId,
                     sdkApiKey = apiKey,
+                    version = 2,
                 }),
                 type =  MessageType.SdkRequestAuthInit
             };
@@ -206,6 +224,28 @@ namespace Bhaptics.SDK2.Universal
             return new TactHubMessage()
             {
                 type = MessageType.SdkPingAll,
+            };
+        }
+        public static TactHubMessage SdkResume(string eventName)
+        {
+            return new TactHubMessage()
+            {
+                message = JsonUtility.ToJson(new ResumeMessage()
+                {
+                    eventName = eventName,
+                }),
+                type = MessageType.SdkResume,
+            };
+        }
+        public static TactHubMessage SdkPause(string eventName)
+        {
+            return new TactHubMessage()
+            {
+                message = JsonUtility.ToJson(new PauseMessage()
+                {
+                    eventName = eventName,
+                }),
+                type = MessageType.SdkPause,
             };
         }
     

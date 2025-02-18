@@ -7,6 +7,7 @@ namespace Bhaptics.SDK2
     public class BhapticsSDK2 : MonoBehaviour
     {
         private static BhapticsSDK2 instance;
+        public static bool IsInitialized { get; private set; }
 
         [Header("Only for PC")]
         [Tooltip("If bHaptics Player(PC) is not turned on when this program starts, it automatically runs bHaptics Player.")]
@@ -30,9 +31,6 @@ namespace Bhaptics.SDK2
 
             bhapticsSettings = BhapticsSettings.Instance;
 
-            var hapticDevices = BhapticsLibrary.GetDevices();
-            BhapticsLogManager.Log($"[bHaptics] devices {hapticDevices.Count}");
-
             if (string.IsNullOrEmpty(bhapticsSettings.AppId))
             {
                 Debug.LogError("[bHaptics] Please set API_ID.");
@@ -42,9 +40,12 @@ namespace Bhaptics.SDK2
             BhapticsLogManager.Log($"[bHaptics] {bhapticsSettings.AppId} {bhapticsSettings.ApiKey}");
             BhapticsLibrary.Initialize(bhapticsSettings.AppId, bhapticsSettings.ApiKey, bhapticsSettings.DefaultDeploy, autoRequestBluetoothPermission);
 
-            var playerSetup = BhapticsLibrary.IsBhapticsAvailable(autoRunBhapticsPlayer);
-            BhapticsLogManager.Log($"[bHaptics] player IsBhapticsAvailable {playerSetup}");
+            IsInitialized = BhapticsLibrary.IsBhapticsAvailable(autoRunBhapticsPlayer);
+            BhapticsLogManager.Log($"[bHaptics] player IsBhapticsAvailable {IsInitialized}");
             BhapticsLogManager.Log("[bHaptics] Initialized.");
+            
+            var hapticDevices = BhapticsLibrary.GetDevices();
+            BhapticsLogManager.Log($"[bHaptics] devices {hapticDevices.Count}");
         }
 
         private void OnApplicationFocus(bool pauseStatus)
@@ -61,10 +62,15 @@ namespace Bhaptics.SDK2
 
         private void OnDestroy()
         {
-            if (instance.GetInstanceID() == this.GetInstanceID())
+            IsInitialized = false;
+
+            if (instance == null || instance.GetInstanceID() != this.GetInstanceID())
             {
-                BhapticsLibrary.Destroy();
+                return;
             }
+
+            BhapticsLibrary.Destroy();
+            
         }
 
         private void OnApplicationQuit()

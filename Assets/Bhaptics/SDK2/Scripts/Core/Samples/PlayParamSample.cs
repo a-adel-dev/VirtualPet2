@@ -54,15 +54,6 @@ namespace Bhaptics.SDK2
         private float offsetY = 0.5f;
         private int selectedIndex = -1;
 
-        public bool clicked = false;
-
-        void Update(){
-            if (clicked){
-                OnClickPlay();
-                clicked = false;
-            }
-        } 
-
 
         public float Intensity
         {

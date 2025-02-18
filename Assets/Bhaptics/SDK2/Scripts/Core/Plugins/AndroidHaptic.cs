@@ -14,6 +14,7 @@ namespace Bhaptics.SDK2
         private static readonly object[] PlayGloveParams = new object[5];
         private static readonly object[] PlayPathParams = new object[5];
         private static readonly jvalue[] PlayEventParams = new jvalue[6];
+        private static readonly jvalue[] PlayEventWithStartMillisParams = new jvalue[7];
         private static readonly jvalue[] PlayLoopParams = new jvalue[8];
         private static readonly jvalue[] EmptyParams = new jvalue[0];
         private static readonly object[] PlayMotorsParams = new object[3];
@@ -22,6 +23,8 @@ namespace Bhaptics.SDK2
         private static readonly jvalue[] StopByRequestIdParams = new jvalue[1];
         private static readonly jvalue[] StopByEventIdParams = new jvalue[1];
         private static readonly object[] PingParams = new object[1];
+        private static readonly object[] PauseParams = new object[1];
+        private static readonly object[] ResumeParams = new object[1];
 
 
         private List<HapticDevice> deviceList;
@@ -36,6 +39,7 @@ namespace Bhaptics.SDK2
         private readonly IntPtr playLoopPtr;
         private readonly IntPtr playGlovePtr;
         private readonly IntPtr playPathPtr;
+        private readonly IntPtr playWithStartMillisPtr;
         
         private readonly IntPtr getEventIdPtr;
 
@@ -44,6 +48,9 @@ namespace Bhaptics.SDK2
         private readonly IntPtr stopAllPtr;
         private readonly IntPtr pingPtr;
         private readonly IntPtr pingAllPtr;
+        
+        private readonly IntPtr pausePtr;
+        private readonly IntPtr resumePtr;
 
         // bool methods
         private readonly IntPtr isPlayingAnythingPtr;
@@ -73,6 +80,7 @@ namespace Bhaptics.SDK2
 
                 
                 playEventPtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr, "playEvent", "(IIFFFF)I");
+                playWithStartMillisPtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr, "playWithStartTime", "(IIIFFFF)I");
                 playGlovePtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr, "playGlove", "(I[I[I[II)I");
                 playPathPtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr,"playPath", "(II[F[F[I)I");
                 getEventIdPtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr, "getEventId", "(Ljava/lang/String;)I");
@@ -84,6 +92,9 @@ namespace Bhaptics.SDK2
 
                 pingPtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr, "ping", "(Ljava/lang/String;)V");
                 pingAllPtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr, "pingAll");
+                
+                pausePtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr, "pause", "(Ljava/lang/String;)V");
+                resumePtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr, "resume", "(Ljava/lang/String;)V");
 
                 isPlayingAnythingPtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr, "isAnythingPlaying", "()Z");
                 isPlayingByEventIdPtr = AndroidJNIHelper.GetMethodID(bhapticsWrapperClassPtr, "isPlayingByEventId", "(I)Z");
@@ -205,12 +216,12 @@ namespace Bhaptics.SDK2
 
 
 
-        public int Play(string eventId)
+        public int Play(string eventId, int requestId)
         {
-            return PlayParam(eventId, 1f, 1f, 0f, 0f);
+            return PlayParam(eventId, requestId, 1f, 1f, 0f, 0f);
         }
 
-        public int PlayParam(string eventId, float intensity, float duration, float angleX, float offsetY)
+        public int PlayParam(string eventId, int requestId, float intensity, float duration, float angleX, float offsetY)
         {
             if (androidJavaObject == null)
             {
@@ -218,7 +229,6 @@ namespace Bhaptics.SDK2
             }
 
             int eventIntValue = TryGetEventIntValue(eventId);
-            int requestId = UnityEngine.Random.Range(0, int.MaxValue);
 
             PlayEventParams[0].i = eventIntValue;
             PlayEventParams[1].i = requestId;
@@ -229,6 +239,25 @@ namespace Bhaptics.SDK2
 
             return AndroidUtils.CallNativeIntMethod(bhapticsWrapperObjectPtr, playEventPtr, PlayEventParams);
             
+        }
+        public int Play(string eventId, int requestId, int startMillis, float intensity, float duration, float angleX, float offsetY)
+        {
+            if (androidJavaObject == null)
+            {
+                return -1;
+            }
+
+            int eventIntValue = TryGetEventIntValue(eventId);
+
+            PlayEventWithStartMillisParams[0].i = eventIntValue;
+            PlayEventWithStartMillisParams[1].i = requestId;
+            PlayEventWithStartMillisParams[2].i = startMillis;
+            PlayEventWithStartMillisParams[3].f = intensity;
+            PlayEventWithStartMillisParams[4].f = duration;
+            PlayEventWithStartMillisParams[5].f = angleX;
+            PlayEventWithStartMillisParams[6].f = offsetY;
+
+            return AndroidUtils.CallNativeIntMethod(bhapticsWrapperObjectPtr, playWithStartMillisPtr, PlayEventWithStartMillisParams);
         }
 
         public int PlayMotors(int position, int[] motors, int durationMillis)
@@ -277,14 +306,13 @@ namespace Bhaptics.SDK2
             return AndroidUtils.CallNativeIntMethod(bhapticsWrapperObjectPtr, playPathPtr, PlayPathParams);
         }
 
-        public int PlayLoop(string eventId, float intensity, float duration, float angleX, float offsetY, int interval, int maxCount)
+        public int PlayLoop(string eventId, int requestId, float intensity, float duration, float angleX, float offsetY, int interval, int maxCount)
         {
             if(androidJavaObject == null)
             {
                 return -1;
             }
             int eventIntValue = TryGetEventIntValue(eventId);
-            int requestId = UnityEngine.Random.Range(0, int.MaxValue);
 
             PlayLoopParams[0].i = eventIntValue;
             PlayLoopParams[1].i = requestId;
@@ -404,6 +432,28 @@ namespace Bhaptics.SDK2
 
             PingParams[0] = address;
             AndroidUtils.CallNativeVoidMethod(bhapticsWrapperObjectPtr, pingPtr, PingParams);
+        }
+
+        public void Resume(string eventId)
+        {
+            if (androidJavaObject == null)
+            {
+                return;
+            }
+
+            ResumeParams[0] = eventId;
+            AndroidUtils.CallNativeVoidMethod(bhapticsWrapperObjectPtr, resumePtr, ResumeParams);
+        }
+        
+        public void Pause(string eventId)
+        {
+            if (androidJavaObject == null)
+            {
+                return;
+            }
+
+            PauseParams[0] = eventId;
+            AndroidUtils.CallNativeVoidMethod(bhapticsWrapperObjectPtr, pausePtr, PauseParams);
         }
     }
 

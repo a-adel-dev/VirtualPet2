@@ -17,12 +17,16 @@ namespace Bhaptics.SDK2
     public class BhapticsEvent
     {
         
-        public const string TOUCH_RIGHT = "touch_right";
+        public const string GAME_START = "game_start";
         
         public const string GRAB = "grab";
         
-        public const string GAME_START = "game_start";
+        public const string TOUCH_RIGHT = "touch_right";
         
         public const string TOUCH_LEFT = "touch_left";
+        
+        public const string TEST2 = "test2";
+        
+        public const string PET = "pet";
     }
 }

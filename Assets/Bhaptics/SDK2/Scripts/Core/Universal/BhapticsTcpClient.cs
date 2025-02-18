@@ -56,17 +56,7 @@ namespace Bhaptics.SDK2.Universal
             return _devices;
         }
 
-        public int Play(string eventName) 
-        {
-            if (!connected) 
-            {
-                return -1;
-            }
-
-            return Play(eventName, 1f, 1f, 0f, 0f);
-        }
-
-        public int Play(string eventName, float intensity, float duration, float angleX, float offsetY)
+        public int Play(string eventName, int requestId, int startMillis, float intensity, float duration, float angleX, float offsetY)
         {
             if (!connected)
             {
@@ -75,12 +65,12 @@ namespace Bhaptics.SDK2.Universal
 
             BhapticsLogManager.Log("[bhaptics-universal] Play: " + eventName + ", " +  DateTime.UtcNow.Millisecond);
 
-            int requesetId = UnityEngine.Random.Range(1, int.MaxValue);
 
             var playMessage = new PlayMessage
             {
                 eventName = eventName,
-                requestId = requesetId,
+                requestId = requestId,
+                startMillis = startMillis,
                 intensity = intensity,
                 duration = duration,
                 offsetAngleX = angleX,
@@ -90,22 +80,20 @@ namespace Bhaptics.SDK2.Universal
 
             SendMessageToTactHub(JsonUtility.ToJson(message));
 
-            return requesetId;
+            return requestId;
         }
 
-        public int PlayLoop(string eventName, float intensity, float duration, float angleX, float offsetY, int interval, int maxCount)
+        public int PlayLoop(string eventName, int requestId, float intensity, float duration, float angleX, float offsetY, int interval, int maxCount)
         {
             if (!connected)
             {
                 return -1;
             }
 
-            int requesetId = UnityEngine.Random.Range(1, int.MaxValue);
-
             var playLoopMessage = new PlayLoopMessage
             {
                 eventName = eventName,
-                requestId = requesetId,
+                requestId = requestId,
                 intensity = intensity,
                 duration = duration,
                 offsetAngleX = angleX,
@@ -117,22 +105,20 @@ namespace Bhaptics.SDK2.Universal
 
             SendMessageToTactHub(JsonUtility.ToJson(message));
 
-            return requesetId;
+            return requestId;
 
         }
 
-        public int PlayMotors(int position, int[] motors, int durationMillis)
+        public int PlayMotors(int position,int requestId, int[] motors, int durationMillis)
         {
             if (!connected)
             {
                 return -1;
             }
 
-            int requesetId = UnityEngine.Random.Range(1, int.MaxValue);
-
             var playDotModeMessage = new PlayDotModeMessage
             {
-                requestId = requesetId,
+                requestId = requestId,
                 pos = position,
                 durationMillis = durationMillis,
                 motors = motors
@@ -141,22 +127,20 @@ namespace Bhaptics.SDK2.Universal
 
             SendMessageToTactHub(JsonUtility.ToJson(message));
 
-            return requesetId;
+            return requestId;
 
         }
 
-        public int PlayWaveform(int position, int[] motorValues, int[] playTimeValues, int[] shapeValues)
+        public int PlayWaveform(int position, int requestId, int[] motorValues, int[] playTimeValues, int[] shapeValues)
         {
             if (!connected)
             {
                 return -1;
             }
 
-            int requesetId = UnityEngine.Random.Range(1, int.MaxValue);
-
             var playWaveformMessage = new PlayWaveformModeMessage
             {
-                requestId= requesetId,
+                requestId= requestId,
                 pos = position,
                 motorValues = motorValues,
                 playTimeValues = playTimeValues,
@@ -166,22 +150,20 @@ namespace Bhaptics.SDK2.Universal
 
             SendMessageToTactHub(JsonUtility.ToJson(message));
 
-            return requesetId;
+            return requestId;
 
         }
 
-        public int PlayPath(int position, float[] xValues, float[] yValues, int[] intensityValues, int duration)
+        public int PlayPath(int position, int requestId, float[] xValues, float[] yValues, int[] intensityValues, int duration)
         {
             if (!connected)
             {
                 return -1;
             }
 
-            int requesetId = UnityEngine.Random.Range(1, int.MaxValue);
-
             var playPathModeMessage = new PlayPathModeMessage
             {
-                requestId = requesetId,
+                requestId = requestId,
                 pos = position,
                 durationMillis = duration,
                 x = xValues,
@@ -192,7 +174,7 @@ namespace Bhaptics.SDK2.Universal
 
             SendMessageToTactHub(JsonUtility.ToJson(message));
 
-            return requesetId;
+            return requestId;
 
         }
 
@@ -262,6 +244,29 @@ namespace Bhaptics.SDK2.Universal
             }
 
             var message = TactHubMessage.SdkPingAll();
+            SendMessageToTactHub(JsonUtility.ToJson(message));
+        }
+        
+        
+        public void ResumePlay(string eventId)
+        {
+            if (!connected)
+            {
+                return;
+            }
+
+            var message = TactHubMessage.SdkResume(eventId);
+            SendMessageToTactHub(JsonUtility.ToJson(message));
+        }
+
+        public void PausePlay(string eventId)
+        {
+            if (!connected)
+            {
+                return;
+            }
+
+            var message = TactHubMessage.SdkPause(eventId);
             SendMessageToTactHub(JsonUtility.ToJson(message));
         }
         

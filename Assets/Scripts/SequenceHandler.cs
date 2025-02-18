@@ -19,6 +19,8 @@ public class SequenceHandler : MonoBehaviour
     [SerializeField] GameObject socket;
     private PickUp pickUp;
     private Animator dogAnimator;
+    
+    private Stopwatch _stopwatch;
 
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -42,7 +44,7 @@ public class SequenceHandler : MonoBehaviour
 
     public void IncrementStateIndex(){
         currentStateIndex += 1;
-        Debug.Log($"Current state: {currentStateIndex}");
+        DataLogger.Instance.LogData($"Current state: {currentStateIndex}");
         if (waitingForPetting){
             waitingForPetting = false;
         }
@@ -83,7 +85,7 @@ public class SequenceHandler : MonoBehaviour
     IEnumerator PickupBone(){
         yield return new WaitForSeconds(2);
         dogAnimator.SetBool("bone", false);
-        Debug.Log($"BONED {currentStateIndex}");
+        // Debug.Log($"BONED {currentStateIndex}");
     }
 
     IEnumerator PromptTakeAway(){
@@ -101,5 +103,23 @@ public class SequenceHandler : MonoBehaviour
 
     public int GetCurrentStateIndex(){
         return currentStateIndex;
+    }
+
+    public void StartPetting()
+    {
+        _stopwatch = new Stopwatch();
+        _stopwatch.Start();
+        DataLogger.Instance.LogData("Starting Petting StopWatch");
+    }
+
+    public void StopPetting()
+    {
+        if (_stopwatch.IsRunning())
+        {
+            DataLogger.Instance.LogData($"Petting time: {_stopwatch.GetElapsedTime()}");
+            _stopwatch.Stop();
+            _stopwatch.Reset();
+            DataLogger.Instance.LogData("Stopping Petting StopWatch");
+        }
     }
 }

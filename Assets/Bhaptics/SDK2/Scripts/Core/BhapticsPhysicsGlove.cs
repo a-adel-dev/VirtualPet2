@@ -321,6 +321,7 @@ namespace Bhaptics.SDK2.Glove
 
         /// <summary>
         /// Sends stay haptic feedback with relative distance and position data.
+        /// </summary>
         /// <param name="position">
         /// <para>type of device</para>
         /// <para> 8 = <see cref="PositionType.GloveL"/> || 9 = <see cref="PositionType.GloveR"/> </para>

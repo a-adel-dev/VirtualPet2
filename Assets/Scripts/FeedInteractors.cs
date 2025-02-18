@@ -39,7 +39,7 @@ public class FeedInteractors : MonoBehaviour
             firstTime = 1;
         }
         if(bone.transform.position == attachPoint.position){
-            Debug.Log($"First time bone {firstTimeBone}");
+            // Debug.Log($"First time bone {firstTimeBone}");
             if(firstTimeBone == 0){
                 // back to sitting 
                 animator.SetBool("idle", true);
@@ -48,21 +48,21 @@ public class FeedInteractors : MonoBehaviour
                 firstTimeBone = 1;
                 StartCoroutine(WaitABitBeforePrompt());
             }else if(firstTimeBone == 2){
-                Debug.Log("Second time bone");
+                // Debug.Log("Second time bone");
             }
         }
         
     }
 
     private void OnTriggerEnter(Collider other) {
-        Debug.Log($"Entered trigger at {Time.time}");
+        // Debug.Log($"Entered trigger at {Time.time}");
     }
 
     private void OnTriggerExit(Collider other) {
-        Debug.Log($"Exited trigger at {Time.time} pos: {bowl.transform.position}");
+        // Debug.Log($"Exited trigger at {Time.time} pos: {bowl.transform.position}");
         if(other.gameObject == bowl){
             if(firstTime == 1){
-                Debug.Log("take away bowl");
+                // Debug.Log("take away bowl");
                 animator.SetBool("eating", false);
                 pantingAudio.Stop();
                 firstTime = 2;
@@ -71,7 +71,7 @@ public class FeedInteractors : MonoBehaviour
         }
         if(other.gameObject == bone){
             if(firstTimeBone == 1){
-                Debug.Log("picked up bone");
+                // Debug.Log("picked up bone");
                 firstTimeBone = 2;
             }
         }
