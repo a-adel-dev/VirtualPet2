@@ -1,15 +1,17 @@
 
+using System.Collections.Generic;
+using UnityEngine;
+
 public class InteractionSMFetchBall : InteractionSMBase
 {
-    public InteractionSMFetchBall(DogAnimator animator, PromptUIController promptUIController) : base(animator, promptUIController)
+    public InteractionSMFetchBall(DogAnimator animator, PromptUIController promptUIController, 
+        Dictionary<InteractableObjects, Transform> interactables) : base(animator, promptUIController, interactables )
     {
-        _animator = animator;
-        _promptUIController = promptUIController;
     }
 
     public override void EnterState()
     {
-        throw new System.NotImplementedException();
+        _interactables[InteractableObjects.Ball].gameObject.SetActive(true);
     }
 
     public override InteractionSMBase ExitState()

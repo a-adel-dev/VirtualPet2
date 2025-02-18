@@ -83,7 +83,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -112,7 +112,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -2218,7 +2218,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Arm_Beagle|Pick_up
+      name: Pick_up
       takeName: Arm_Beagle|Pick_up
       internalID: 5028826353448391590
       firstFrame: 0
@@ -2247,7 +2247,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Arm_Beagle|Pick_up_idle
+      name: Pick_up_idle
       takeName: Arm_Beagle|Pick_up_idle
       internalID: -8949013816930813937
       firstFrame: 0
@@ -2334,7 +2334,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Arm_Beagle|Run_F_IP
+      name: Run_F_IP
       takeName: Arm_Beagle|Run_F_IP
       internalID: 4141663591794264854
       firstFrame: 0
@@ -2537,7 +2537,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Arm_Beagle|Sitting_end
+      name: Sitting_end
       takeName: Arm_Beagle|Sitting_end
       internalID: 307567030730512275
       firstFrame: 0
@@ -2566,7 +2566,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Arm_Beagle|Sitting_loop_1
+      name: Sitting_loop_1
       takeName: Arm_Beagle|Sitting_loop_1
       internalID: -9171481342807515434
       firstFrame: 0
@@ -2595,7 +2595,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Arm_Beagle|Sitting_loop_2
+      name: Sitting_loop_2
       takeName: Arm_Beagle|Sitting_loop_2
       internalID: 3882351065945017213
       firstFrame: 0
@@ -2624,7 +2624,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Arm_Beagle|Sitting_start
+      name: Sitting_start
       takeName: Arm_Beagle|Sitting_start
       internalID: 1476656726193569657
       firstFrame: 0
@@ -2943,7 +2943,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Arm_Beagle|Trot_F_IP
+      name: Trot_F_IP
       takeName: Arm_Beagle|Trot_F_IP
       internalID: -3634739999948182400
       firstFrame: 0
@@ -3059,7 +3059,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Arm_Beagle|Turn_L_IP
+      name: Turn_L_IP
       takeName: Arm_Beagle|Turn_L_IP
       internalID: -2130627373937932171
       firstFrame: 0
@@ -3233,7 +3233,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Arm_Beagle|Walk_F_IP
+      name: Walk_F_IP
       takeName: Arm_Beagle|Walk_F_IP
       internalID: 3766352230856816669
       firstFrame: 0

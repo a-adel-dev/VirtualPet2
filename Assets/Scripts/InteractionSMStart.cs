@@ -1,13 +1,13 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractionSMStart : InteractionSMBase
 {
     int _statePhase = 0;
-    public InteractionSMStart(DogAnimator animator, PromptUIController promptUIController) : base(animator, promptUIController)
+    public InteractionSMStart(DogAnimator animator, PromptUIController promptUIController,
+        Dictionary<InteractableObjects, Transform> interactables) : base(animator, promptUIController, interactables)
     {
-        _animator = animator;
-        _promptUIController = promptUIController;
     }
 
     public override void EnterState()
@@ -18,7 +18,7 @@ public class InteractionSMStart : InteractionSMBase
 
     public override InteractionSMBase ExitState()
     {
-        return new InteractionSMFetchBall(_animator, _promptUIController);
+        return new InteractionSMFetchBall(_animator, _promptUIController, _interactables);
     }
 
     public override void UpdateState()
