@@ -29,7 +29,8 @@ public class HandControl : MonoBehaviour
     }
 
     void OnTriggerStay(Collider collider)
-    {   
+    {  
+        if (!GameConfig.Instance.IsUsingActiveHaptics) return;
         if(collider.gameObject.CompareTag("dog"))
         {
             gloveController.PlayHapticFeedback();
@@ -42,6 +43,7 @@ public class HandControl : MonoBehaviour
         {
             gloveController.StopHapticFeedback();
             _animator.SetBool("idle", false);
+            DataLogger.Instance.LogData($"Stopped petting with {gameObject.name} at {collider.gameObject.name}");
         }
     }
 }

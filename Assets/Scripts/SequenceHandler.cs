@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 
@@ -17,8 +18,7 @@ public class SequenceHandler : MonoBehaviour
     [SerializeField] GameObject boneUI;
     [SerializeField] GameObject bowl;
     [SerializeField] GameObject socket;
-    private PickUp pickUp;
-    private Animator dogAnimator;
+    private Animator _dogAnimator;
     
     private Stopwatch _stopwatch;
 
@@ -26,20 +26,18 @@ public class SequenceHandler : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        pickUp = GetComponent<PickUp>();
-        dogAnimator = GetComponent<Animator>();
+        _dogAnimator = GetComponent<Animator>();
         DataLogger.Instance.LogData("=============starting new session===============");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        DataLogger.Instance.LogData($"User name: {GameConfig.Instance.Username}");
+        DataLogger.Instance.LogData($"{(GameConfig.Instance.IsLeftHanded ? "user is left handed" : "user is right handed")}");
+        DataLogger.Instance.LogData($"{(GameConfig.Instance.IsUsingActiveHaptics ? "Active haptics is in use" : "No Active Haptics in use")}");
+        DataLogger.Instance.LogData($"{(GameConfig.Instance.IsUsingPassiveHaptics ? "Passive haptics is in use" : "No Passive Haptics in use")}");
+        DataLogger.Instance.LogData($"Session start Time: {DateTime.Now}");        
     }
 
     public void SetStateIndex(int num){
         currentStateIndex = num;
-        PerformeCurrentState();
+        PerformCurrentState();
     }
 
     public void IncrementStateIndex(){
@@ -48,23 +46,23 @@ public class SequenceHandler : MonoBehaviour
         if (waitingForPetting){
             waitingForPetting = false;
         }
-        PerformeCurrentState();
+        PerformCurrentState();
     }
 
-    private void PerformeCurrentState(){
+    private void PerformCurrentState(){
         if(currentStateIndex == 1){
             fetchingUI.SetActive(true);
         }else if(currentStateIndex == 2){
-            dogAnimator.SetBool("sleep", true);
+            _dogAnimator.SetBool("sleep", true);
             // bowl.SetActive(true);
             StartCoroutine(PromptFeeding());
         }else if(currentStateIndex == 3){
-            dogAnimator.SetBool("eating", true);
+            _dogAnimator.SetBool("eating", true);
             StartCoroutine(PromptTakeAway());
         }else if(currentStateIndex == 4){
             boneUI.SetActive(true);
         }else if(currentStateIndex == 5){
-            dogAnimator.SetBool("bone", true);
+            _dogAnimator.SetBool("bone", true);
             StartCoroutine(PickupBone());
         }else if(currentStateIndex == 6){
             finishUI.SetActive(true);
@@ -83,7 +81,7 @@ public class SequenceHandler : MonoBehaviour
 
     IEnumerator PickupBone(){
         yield return new WaitForSeconds(2);
-        dogAnimator.SetBool("bone", false);
+        _dogAnimator.SetBool("bone", false);
         // Debug.Log($"BONED {currentStateIndex}");
     }
 
