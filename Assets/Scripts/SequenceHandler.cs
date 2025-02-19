@@ -28,6 +28,7 @@ public class SequenceHandler : MonoBehaviour
     {
         pickUp = GetComponent<PickUp>();
         dogAnimator = GetComponent<Animator>();
+        DataLogger.Instance.LogData("=============starting new session===============");
     }
 
     // Update is called once per frame
@@ -37,7 +38,6 @@ public class SequenceHandler : MonoBehaviour
     }
 
     public void SetStateIndex(int num){
-        Debug.Log(num);
         currentStateIndex = num;
         PerformeCurrentState();
     }
@@ -67,7 +67,6 @@ public class SequenceHandler : MonoBehaviour
             dogAnimator.SetBool("bone", true);
             StartCoroutine(PickupBone());
         }else if(currentStateIndex == 6){
-            Debug.Log("END");
             finishUI.SetActive(true);
         }
     }

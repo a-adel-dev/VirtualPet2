@@ -75,9 +75,9 @@ public class DataLogger : MonoBehaviour
         Debug.Log("Data saved to file.");
     }
 
-    // private void OnApplicationQuit()
-    // {
-    //     // Save any remaining data when the app quits
-    //     SaveDataToFile();
-    // }
+    private void OnApplicationQuit()
+    {
+        // Save any remaining data when the app quits
+        SaveDataToFile();
+    }
 }
