@@ -1,28 +1,14 @@
-using System;
+
 using UnityEngine;
 
-namespace DefaultNamespace
+
+public class Testing : MonoBehaviour
 {
-    public class Testing : MonoBehaviour
+    
+    [SerializeField] private TMPro.TMP_Text text;
+
+    private void Start()
     {
-        private bool _isPetting;
-
-        void OnTriggerEnter(Collider collider)
-        {
-            if(collider.gameObject.CompareTag("dog"))
-            {
-                if (_isPetting) return;
-                Debug.Log("Petting with right hand");
-
-            }
-        }
-
-        void OnTriggerExit(Collider collider)
-        {
-            if(collider.gameObject.CompareTag("dog"))
-            {
-                Debug.Log("Stopped petting with right hand");
-            }
-        }
+        text.text = GameConfig.Instance.Username;
     }
 }
