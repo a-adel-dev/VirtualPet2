@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    // Recommended build index structure:
+    // Build index structure:
     // 0 - MainMenu
     // 1 - Pet Interaction
     // 2 - Tutorial
