@@ -6,25 +6,19 @@ using UnityEngine;
 */
 public class HandControl : MonoBehaviour
 {
-    [SerializeField] GameObject dog;
+    [SerializeField] private HandIdentifier handIdentifier;
     [SerializeField] GloveController gloveController;
     [SerializeField] SequenceHandler sequenceHandler;
     private Animator _animator;
 
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        _animator = dog.GetComponent<Animator>();
-    }
+    
 
     void OnTriggerEnter(Collider collider)
     {
-        // Debug.Log("Hand touching sth");
         if(collider.gameObject.CompareTag("dog"))
         {
             DataLogger.Instance.LogData($"Petting with {gameObject.name} at {collider.gameObject.name}");
-            // Debug.Log("Petting with right hand");
         }
     }
 
@@ -33,7 +27,7 @@ public class HandControl : MonoBehaviour
         if (!GameConfig.Instance.IsUsingActiveHaptics) return;
         if(collider.gameObject.CompareTag("dog"))
         {
-            gloveController.PlayHapticFeedback();
+            gloveController.PlayHapticFeedback(handIdentifier);
         }
     }
 

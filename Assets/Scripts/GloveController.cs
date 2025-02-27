@@ -26,28 +26,22 @@ public class GloveController : MonoBehaviour
         }
     }
 
-    public void PlayHapticFeedback(){
-
-        // Disable this if condition if you want to let the haptic plays anytime
-        // Enable this if condition if you only want it to play while system is waiting for user to pet
-        if (sequenceHandler.GetIsWaitingForPetting()){
-            // Right hand dominance
-            if(rightHand){
-                BhapticsLibrary.Play("pet");
-                // Debug.Log("touch_right");
+    public void PlayHapticFeedback(HandIdentifier hand)
+    {
+        if (sequenceHandler.GetIsWaitingForPetting())
+        {
+            if (hand == HandIdentifier.Right)
+            {
+                BhapticsLibrary.Play("pet_r");
             }
-            // Left hand dominance
-            else{
-                BhapticsLibrary.Play("pet");
-                // Debug.Log("touch_left");
+            else
+            {
+                BhapticsLibrary.Play("pet_l");
             }
         }
     }
 
     public void StopHapticFeedback(){
-        // Debug.Log("Should stop");
         BhapticsLibrary.StopAll();
-        // BhapticsManager.Stop("touch");
-
     }
 }

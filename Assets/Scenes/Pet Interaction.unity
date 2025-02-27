@@ -2045,7 +2045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd39ee809cf7ce4aa85d2df668d0541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dog: {fileID: 1556886654}
+  handIdentifier: 0
   gloveController: {fileID: 1625292004}
   sequenceHandler: {fileID: 0}
 --- !u!4 &364398917 stripped
@@ -5116,7 +5116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd39ee809cf7ce4aa85d2df668d0541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dog: {fileID: 1556886654}
+  handIdentifier: 0
   gloveController: {fileID: 1625292004}
   sequenceHandler: {fileID: 1556886663}
 --- !u!65 &702586721
@@ -7175,7 +7175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd39ee809cf7ce4aa85d2df668d0541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dog: {fileID: 1556886654}
+  handIdentifier: 1
   gloveController: {fileID: 1625292004}
   sequenceHandler: {fileID: 1556886663}
 --- !u!65 &992073442
@@ -9461,7 +9461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd39ee809cf7ce4aa85d2df668d0541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dog: {fileID: 1556886654}
+  handIdentifier: 0
   gloveController: {fileID: 1625292004}
   sequenceHandler: {fileID: 0}
 --- !u!65 &1511910361

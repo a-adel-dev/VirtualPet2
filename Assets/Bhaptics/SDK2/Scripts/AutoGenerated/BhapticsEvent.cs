@@ -19,6 +19,8 @@ namespace Bhaptics.SDK2
         
         public const string GAME_START = "game_start";
         
-        public const string PET = "pet";
+        public const string PET_R = "pet_r";
+        
+        public const string PET_L = "pet_l";
     }
 }
