@@ -13,7 +13,7 @@ public class AttachToMouth : MonoBehaviour
     [SerializeField] Transform socket;
     [SerializeField] GameObject socketParent;
     [SerializeField] SequenceHandler sequenceHandler;
-    private GameObject gameObject;
+    private GameObject _gameObject;
     private bool grabbed = false;
 
     void Start()
@@ -23,7 +23,7 @@ public class AttachToMouth : MonoBehaviour
 
     void Update(){
         if(touchMouth){
-            gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            _gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         }
     }
 
@@ -33,11 +33,11 @@ public class AttachToMouth : MonoBehaviour
         if(collider.gameObject.CompareTag("ball") && !touchMouth)
         {
             touchMouth = true;
-            gameObject = collider.gameObject;
+            _gameObject = collider.gameObject;
             StartCoroutine(Comeback());
 
         }else if(collider.gameObject.CompareTag("bone") && !touchMouth && !grabbed && sequenceHandler.GetCurrentStateIndex() == 5){
-            gameObject = collider.gameObject;
+            _gameObject = collider.gameObject;
             grabbed = true;
             touchMouth = true;
             socketParent.SetActive(false);
@@ -58,7 +58,7 @@ public class AttachToMouth : MonoBehaviour
         // Debug.Log("attack bone to socket ATM");
         socketParent.SetActive(true);
         touchMouth=false;
-        gameObject.transform.position = socket.position;
+        _gameObject.transform.position = socket.position;
         StartCoroutine(PromptPetting());
     }
 

@@ -14,7 +14,7 @@ public class DataLogger : MonoBehaviour
         {
             if (_instance == null)
             {
-                _instance = FindObjectOfType<DataLogger>();
+                _instance = FindFirstObjectByType<DataLogger>();
                 if (_instance == null)
                 {
                     GameObject singletonObject = new GameObject("DataLogger");
@@ -78,6 +78,6 @@ public class DataLogger : MonoBehaviour
     private void OnApplicationQuit()
     {
         // Save any remaining data when the app quits
-        SaveDataToFile();
+        // SaveDataToFile();
     }
 }

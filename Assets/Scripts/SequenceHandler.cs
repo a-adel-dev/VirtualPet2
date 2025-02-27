@@ -54,7 +54,6 @@ public class SequenceHandler : MonoBehaviour
             fetchingUI.SetActive(true);
         }else if(currentStateIndex == 2){
             _dogAnimator.SetBool("sleep", true);
-            // bowl.SetActive(true);
             StartCoroutine(PromptFeeding());
         }else if(currentStateIndex == 3){
             _dogAnimator.SetBool("eating", true);

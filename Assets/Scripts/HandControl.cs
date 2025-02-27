@@ -16,6 +16,7 @@ public class HandControl : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
+        if (!sequenceHandler.GetIsWaitingForPetting()) return;
         if(collider.gameObject.CompareTag("dog"))
         {
             DataLogger.Instance.LogData($"Petting with {gameObject.name} at {collider.gameObject.name}");
@@ -25,7 +26,8 @@ public class HandControl : MonoBehaviour
     void OnTriggerStay(Collider collider)
     {  
         if (!GameConfig.Instance.IsUsingActiveHaptics) return;
-        if(collider.gameObject.CompareTag("dog"))
+        if (!sequenceHandler.GetIsWaitingForPetting()) return;
+        if(collider.gameObject.CompareTag("dog") && sequenceHandler.GetIsWaitingForPetting())
         {
             gloveController.PlayHapticFeedback(handIdentifier);
         }
@@ -33,7 +35,8 @@ public class HandControl : MonoBehaviour
 
     void OnTriggerExit(Collider collider)
     {
-        if(collider.gameObject.CompareTag("dog"))
+        if (!sequenceHandler.GetIsWaitingForPetting()) return;
+        if(collider.gameObject.CompareTag("dog") && sequenceHandler.GetIsWaitingForPetting())
         {
             gloveController.StopHapticFeedback();
             DataLogger.Instance.LogData($"Stopped petting with {gameObject.name} at {collider.gameObject.name}");

@@ -22,25 +22,27 @@ public class PickUp : MonoBehaviour
     public bool sleep = false;
     private SequenceHandler sequenceHandler;
     private XRGrabInteractable grabInteractable;
-    private Rigidbody targetRigidbody;
+    private Rigidbody _ballRigidBody;
     public float stopDistance = 1.5f;
-    private float velocityThreshold = 0.1f;
+    // private float velocityThreshold = 0.1f;
     private Animator animator;
-    private bool awaitPetting = false;
+    // private bool awaitPetting = false;
     private bool firstTime = true;
-    private AudioSource audioSource;
-    private Transform SpawnPos;
-    private float checkInterval = 0.01f; // How often to check the velocity
+    private AudioSource _audioSource;
+    private Vector3 _spawnPos;
+    private float _checkInterval = 0.01f; // How often to check the velocity
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         sequenceHandler = GetComponent<SequenceHandler>();
-        SpawnPos = GameObject.Find("SpawnPos").transform;
-        audioSource = GetComponent<AudioSource>();
+        // SpawnPos = GameObject.Find("SpawnPos").transform;
+        _spawnPos = ball.transform.position;
+        // Debug.Log($"Spawn position:{_spawnPos}");
+        _audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         grabInteractable = ball.GetComponent<XRGrabInteractable>();
-        targetRigidbody = ball.GetComponent<Rigidbody>();
+        _ballRigidBody = ball.GetComponent<Rigidbody>();
         if (grabInteractable != null)
         {
             grabInteractable.selectExited.AddListener(OnThrow);
@@ -93,22 +95,25 @@ public class PickUp : MonoBehaviour
         float timeout = 2f; // Max time to wait
         float elapsedTime = 0f;
         
-        while(targetRigidbody.linearVelocity.magnitude > 0.1f && elapsedTime < timeout){
-            yield return new WaitForSeconds(checkInterval);
-            elapsedTime += checkInterval;
+        while(_ballRigidBody.linearVelocity.magnitude > 0.1f && elapsedTime < timeout){
+            yield return new WaitForSeconds(_checkInterval);
+            elapsedTime += _checkInterval;
         }
 
         // Debug.Log("Ball has stopped!");
         Vector3 finalPosition = ball.transform.position;
         // Debug.Log("Final position: " + finalPosition);
-        float distance = Vector3.Distance(ball.transform.position, startPos.transform.position);
+        float distance = Vector3.Distance(finalPosition, startPos.transform.position);
         // Debug.Log("Distance: " + distance);
         if (distance < 1.5){
             // Debug.Log("Distance less than 1m");
-            targetRigidbody.isKinematic = true;
-            ball.transform.position = SpawnPos.position;
+            _ballRigidBody.isKinematic = true;
+            Debug.Log(ball.transform.position);
+            // Debug.Log($"resetting ball position from {ball.transform.position} to {_spawnPos}");
+            ball.transform.position = _spawnPos;
             yield return new WaitForFixedUpdate();
-            targetRigidbody.isKinematic = false;
+            Debug.Log(ball.transform.position);
+            _ballRigidBody.isKinematic = false;
             
             // throw too close, prompt to do it again
             if(ball.activeSelf){
@@ -133,8 +138,8 @@ public class PickUp : MonoBehaviour
             ballLanded = false;
 
             // stop ball motion
-            targetRigidbody.linearVelocity = Vector3.zero;
-            targetRigidbody.angularVelocity = Vector3.zero;
+            _ballRigidBody.linearVelocity = Vector3.zero;
+            _ballRigidBody.angularVelocity = Vector3.zero;
 
             // start pickup animation
             animator.SetBool("run", false);
@@ -172,7 +177,7 @@ public class PickUp : MonoBehaviour
         // Debug.Log($"Detaching from dog mouth...{Time.time}");
         if(sequenceHandler.GetCurrentStateIndex() < 5){
             attachToMouth.DetachBallFromMouth();
-            ball.SetActive(false);
+            // ball.SetActive(false);
             // Destroy(ball);
         }else{
             // Debug.Log("Detaching BONE from dog mouth...");
@@ -189,6 +194,7 @@ public class PickUp : MonoBehaviour
     IEnumerator StopHappy(){
         yield return new WaitForSeconds(2f);
         animator.SetBool("happy", false);
+        ball.SetActive(false);
 
         // trigger petting prompt
         sequenceHandler.PromptPetting();
@@ -228,9 +234,9 @@ public class PickUp : MonoBehaviour
     }
 
     public void Barking(){
-        if(!audioSource.isPlaying){
+        if(!_audioSource.isPlaying){
             // Debug.Log("Play Barking");
-            audioSource.Play();
+            _audioSource.Play();
         }
     }
 }

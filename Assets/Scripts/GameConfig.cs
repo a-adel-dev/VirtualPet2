@@ -18,7 +18,7 @@ public class GameConfig : MonoBehaviour
         {
             if (_instance == null)
             {
-                _instance = FindObjectOfType<GameConfig>();
+                _instance = FindFirstObjectByType<GameConfig>();
 
                 if (_instance == null)
                 {
