@@ -1519,6 +1519,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7070962231783674819, guid: db509fafaff5ac64296e88e179522204, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 7070962232184467359, guid: db509fafaff5ac64296e88e179522204, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1534,6 +1538,10 @@ PrefabInstance:
     - target: {fileID: 8249172006625613628, guid: db509fafaff5ac64296e88e179522204, type: 3}
       propertyPath: m_CameraYOffset
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249172006625613628, guid: db509fafaff5ac64296e88e179522204, type: 3}
+      propertyPath: m_RequestedTrackingOriginMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8500117950953969341, guid: db509fafaff5ac64296e88e179522204, type: 3}
       propertyPath: m_Name
