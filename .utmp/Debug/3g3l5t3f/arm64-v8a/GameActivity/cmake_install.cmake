@@ -1,4 +1,4 @@
-# Install script for directory: C:/Repos/Unity/VirtualPet_V2/Library/PramData/AndroidApplicationController/Cache/com.HXI.VirtualPetV2/gradle-project/unityLibrary/src/main/cpp/GameActivity
+# Install script for directory: C:/Repos/Unity/VirtualPet_V2/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

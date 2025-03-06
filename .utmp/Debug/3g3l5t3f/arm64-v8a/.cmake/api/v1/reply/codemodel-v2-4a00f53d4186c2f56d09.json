@@ -66,7 +66,7 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "game::@d02bb112ea9f9c2ed29f",
-					"jsonFile" : "target-game-Debug-e96952037d991db13f75.json",
+					"jsonFile" : "target-game-Debug-6fc8c37695febd14976a.json",
 					"name" : "game",
 					"projectIndex" : 1
 				}
@@ -77,7 +77,7 @@
 	"paths" : 
 	{
 		"build" : "C:/Repos/Unity/VirtualPet_V2/.utmp/Debug/3g3l5t3f/arm64-v8a",
-		"source" : "C:/Repos/Unity/VirtualPet_V2/Library/PramData/AndroidApplicationController/Cache/com.HXI.VirtualPetV2/gradle-project/unityLibrary/src/main/cpp"
+		"source" : "C:/Repos/Unity/VirtualPet_V2/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp"
 	},
 	"version" : 
 	{

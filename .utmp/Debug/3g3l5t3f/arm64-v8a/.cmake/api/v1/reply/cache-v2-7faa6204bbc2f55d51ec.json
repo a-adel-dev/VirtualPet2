@@ -659,7 +659,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Repos/Unity/VirtualPet_V2/Library/PramData/AndroidApplicationController/Cache/com.HXI.VirtualPetV2/gradle-project/unityLibrary/src/main/cpp"
+			"value" : "C:/Repos/Unity/VirtualPet_V2/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -695,7 +695,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "C:\\Repos\\Unity\\VirtualPet_V2\\Library\\PramData\\AndroidApplicationController\\Cache\\com.HXI.VirtualPetV2\\gradle-project\\unityLibrary\\build\\intermediates\\cxx\\Debug\\3g3l5t3f\\obj\\arm64-v8a"
+			"value" : "C:\\Repos\\Unity\\VirtualPet_V2\\Library\\Bee\\Android\\Prj\\IL2CPP\\Gradle\\unityLibrary\\build\\intermediates\\cxx\\Debug\\3g3l5t3f\\obj\\arm64-v8a"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -967,7 +967,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "C:\\Repos\\Unity\\VirtualPet_V2\\Library\\PramData\\AndroidApplicationController\\Cache\\com.HXI.VirtualPetV2\\gradle-project\\unityLibrary\\build\\intermediates\\cxx\\Debug\\3g3l5t3f\\obj\\arm64-v8a"
+			"value" : "C:\\Repos\\Unity\\VirtualPet_V2\\Library\\Bee\\Android\\Prj\\IL2CPP\\Gradle\\unityLibrary\\build\\intermediates\\cxx\\Debug\\3g3l5t3f\\obj\\arm64-v8a"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1263,7 +1263,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Repos/Unity/VirtualPet_V2/Library/PramData/AndroidApplicationController/Cache/com.HXI.VirtualPetV2/gradle-project/unityLibrary/src/main/cpp"
+			"value" : "C:/Repos/Unity/VirtualPet_V2/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp"
 		},
 		{
 			"name" : "game-activity_DIR",
@@ -1323,7 +1323,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Repos/Unity/VirtualPet_V2/Library/PramData/AndroidApplicationController/Cache/com.HXI.VirtualPetV2/gradle-project/unityLibrary/src/main/cpp/GameActivity"
+			"value" : "C:/Repos/Unity/VirtualPet_V2/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity"
 		}
 	],
 	"kind" : "cache",
