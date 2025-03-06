@@ -1670,12 +1670,28 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2674722033755431784, guid: db509fafaff5ac64296e88e179522204, type: 3}
+      propertyPath: m_Renderer
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829810011116100208, guid: db509fafaff5ac64296e88e179522204, type: 3}
+      propertyPath: m_Renderer
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2903617299012812944, guid: db509fafaff5ac64296e88e179522204, type: 3}
       propertyPath: m_AttachTransform
       value: 
       objectReference: {fileID: 481731378}
+    - target: {fileID: 3295941732182818203, guid: db509fafaff5ac64296e88e179522204, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3392739833478885903, guid: db509fafaff5ac64296e88e179522204, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451601436279309443, guid: db509fafaff5ac64296e88e179522204, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3743394599524833548, guid: db509fafaff5ac64296e88e179522204, type: 3}
@@ -1685,6 +1701,14 @@ PrefabInstance:
     - target: {fileID: 4295562510705317860, guid: db509fafaff5ac64296e88e179522204, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4661120500996315078, guid: db509fafaff5ac64296e88e179522204, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824662333905268446, guid: db509fafaff5ac64296e88e179522204, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4890485629280184206, guid: db509fafaff5ac64296e88e179522204, type: 3}
       propertyPath: m_Enabled
@@ -1750,6 +1774,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: hand
       objectReference: {fileID: 0}
+    - target: {fileID: 7519864930876365208, guid: db509fafaff5ac64296e88e179522204, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7638362128973422720, guid: db509fafaff5ac64296e88e179522204, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8249172006625613628, guid: db509fafaff5ac64296e88e179522204, type: 3}
       propertyPath: m_CameraYOffset
       value: 0.6
@@ -1802,6 +1834,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8667177744950647468, guid: db509fafaff5ac64296e88e179522204, type: 3}
+      propertyPath: m_ObjectToHide
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8796379513647276980, guid: db509fafaff5ac64296e88e179522204, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8796379513647276980, guid: db509fafaff5ac64296e88e179522204, type: 3}
+      propertyPath: m_ObjectToHide
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9147077624280487857, guid: db509fafaff5ac64296e88e179522204, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1810,6 +1854,10 @@ PrefabInstance:
     - {fileID: 6150518709511452706, guid: db509fafaff5ac64296e88e179522204, type: 3}
     m_RemovedGameObjects:
     - {fileID: 2494774937640184573, guid: db509fafaff5ac64296e88e179522204, type: 3}
+    - {fileID: 7519864930876365208, guid: db509fafaff5ac64296e88e179522204, type: 3}
+    - {fileID: 7638362128973422720, guid: db509fafaff5ac64296e88e179522204, type: 3}
+    - {fileID: 6403268743116661304, guid: db509fafaff5ac64296e88e179522204, type: 3}
+    - {fileID: 6523462187814017824, guid: db509fafaff5ac64296e88e179522204, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7070962231568240610, guid: db509fafaff5ac64296e88e179522204, type: 3}
       insertIndex: -1
