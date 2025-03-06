@@ -78,6 +78,6 @@ public class DataLogger : MonoBehaviour
     private void OnApplicationQuit()
     {
         // Save any remaining data when the app quits
-        // SaveDataToFile();
+        SaveDataToFile();
     }
 }

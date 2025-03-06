@@ -64,6 +64,7 @@ public class SequenceHandler : MonoBehaviour
             _dogAnimator.SetBool("bone", true);
             StartCoroutine(PickupBone());
         }else if(currentStateIndex == 6){
+            DataLogger.Instance.SaveDataToFile();
             finishUI.SetActive(true);
         }
     }
