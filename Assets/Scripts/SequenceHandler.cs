@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using System.Diagnostics;
 
 /*
     This script is attached to Beagle_c1
@@ -74,24 +75,31 @@ public class SequenceHandler : MonoBehaviour
     }
 
     IEnumerator PromptFeeding(){
+        UnityEngine.Debug.Log("Started feeding");
         yield return new WaitForSeconds(2);
         socket.SetActive(true);
+        UnityEngine.Debug.Log("Stopped feeding");
         feedingUI.SetActive(true);
     }
 
     IEnumerator PickupBone(){
+        UnityEngine.Debug.Log("Started pickup bone");
         yield return new WaitForSeconds(2);
         _dogAnimator.SetBool("bone", false);
+        UnityEngine.Debug.Log("Stopped pickup bone");
         // Debug.Log($"BONED {currentStateIndex}");
     }
 
     IEnumerator PromptTakeAway(){
+        UnityEngine.Debug.Log("Started take away");
         yield return new WaitForSeconds(5);
         takeAwayUI.SetActive(true);
+        UnityEngine.Debug.Log("Stopped take away");
     }
 
     public void SetWaitingForPetting(){
         waitingForPetting = true;
+
     }
 
     public bool GetIsWaitingForPetting(){
