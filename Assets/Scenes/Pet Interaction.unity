@@ -1018,7 +1018,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The dog is hungry, grab the bowl and drop it inside the red square.
+  m_text: The dog is hungry, grab the bowl from the table on your left, and drop
+    it inside the red square.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1651,6 +1652,10 @@ PrefabInstance:
     - target: {fileID: 6226838854360287499, guid: db509fafaff5ac64296e88e179522204, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6268128603679854803, guid: db509fafaff5ac64296e88e179522204, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7070962231137567638, guid: db509fafaff5ac64296e88e179522204, type: 3}
       propertyPath: m_Enabled
@@ -10122,7 +10127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1548251156
 Transform:
   m_ObjectHideFlags: 0
@@ -14852,7 +14857,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Grab the ball and throw it.
+  m_text: Look to your left. Grab the ball and throw it on the carpet in front of
+    you.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
