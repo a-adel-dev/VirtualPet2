@@ -3,7 +3,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(XRGrabInteractable))]
-public class TutorialBall : MonoBehaviour
+public class RespawnAfterThrow : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private float respawnDelay = 2f;
