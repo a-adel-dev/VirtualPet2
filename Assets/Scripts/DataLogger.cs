@@ -44,7 +44,7 @@ public class DataLogger : MonoBehaviour
         _filePath = Path.Combine(Application.persistentDataPath, "runtime_data.txt");
 
         // Log the file path for debugging
-        Debug.Log("Data will be saved to: " + _filePath);
+        // Debug.Log("Data will be saved to: " + _filePath);
     }
 
     public void LogData(string data)
@@ -72,7 +72,7 @@ public class DataLogger : MonoBehaviour
         // Clear the data lines after saving
         _dataLines.Clear();
 
-        Debug.Log("Data saved to file.");
+        // Debug.Log("Data saved to file.");
     }
 
     private void OnApplicationQuit()

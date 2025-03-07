@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Diagnostics;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using Debug = UnityEngine.Debug;
 
 /*
     This script is attached to Beagle_c1
@@ -33,7 +35,7 @@ public class SequenceHandler : MonoBehaviour
         DataLogger.Instance.LogData($"{(GameConfig.Instance.IsLeftHanded ? "user is left handed" : "user is right handed")}");
         DataLogger.Instance.LogData($"{(GameConfig.Instance.IsUsingActiveHaptics ? "Active haptics is in use" : "No Active Haptics in use")}");
         DataLogger.Instance.LogData($"{(GameConfig.Instance.IsUsingPassiveHaptics ? "Passive haptics is in use" : "No Passive Haptics in use")}");
-        DataLogger.Instance.LogData($"Session start Time: {DateTime.Now}");        
+        DataLogger.Instance.LogData($"Session start Time: {DateTime.Now}"); 
     }
 
     public void SetStateIndex(int num){
@@ -75,26 +77,27 @@ public class SequenceHandler : MonoBehaviour
     }
 
     IEnumerator PromptFeeding(){
-        UnityEngine.Debug.Log("Started feeding");
+        // UnityEngine.Debug.Log("Started feeding");
         yield return new WaitForSeconds(2);
         socket.SetActive(true);
-        UnityEngine.Debug.Log("Stopped feeding");
+        // UnityEngine.Debug.Log("Stopped feeding");
         feedingUI.SetActive(true);
     }
 
     IEnumerator PickupBone(){
-        UnityEngine.Debug.Log("Started pickup bone");
+        // UnityEngine.Debug.Log("Started pickup bone");
         yield return new WaitForSeconds(2);
         _dogAnimator.SetBool("bone", false);
-        UnityEngine.Debug.Log("Stopped pickup bone");
+        // UnityEngine.Debug.Log("Stopped pickup bone");
         // Debug.Log($"BONED {currentStateIndex}");
     }
 
     IEnumerator PromptTakeAway(){
-        UnityEngine.Debug.Log("Started take away");
+        // UnityEngine.Debug.Log("Started take away");
         yield return new WaitForSeconds(5);
         takeAwayUI.SetActive(true);
-        UnityEngine.Debug.Log("Stopped take away");
+        bowl.GetComponent<XRGrabInteractable>().enabled = true;
+        // UnityEngine.Debug.Log("Stopped take away");
     }
 
     public void SetWaitingForPetting(){
@@ -126,5 +129,10 @@ public class SequenceHandler : MonoBehaviour
             _stopwatch.Reset();
             DataLogger.Instance.LogData("Stopping Petting StopWatch");
         }
+    }
+    
+    public void SetReadytoTakeBowl()
+    {
+        socket.transform.GetChild(0).GetChild(2).GetComponent<FeedInteractors>().SetReadytoTakeBowl();
     }
 }

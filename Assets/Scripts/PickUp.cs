@@ -108,11 +108,11 @@ public class PickUp : MonoBehaviour
         if (distance < 1.5){
             // Debug.Log("Distance less than 1m");
             _ballRigidBody.isKinematic = true;
-            Debug.Log(ball.transform.position);
+            // Debug.Log(ball.transform.position);
             // Debug.Log($"resetting ball position from {ball.transform.position} to {_spawnPos}");
             ball.transform.position = _spawnPos;
             yield return new WaitForFixedUpdate();
-            Debug.Log(ball.transform.position);
+            // Debug.Log(ball.transform.position);
             _ballRigidBody.isKinematic = false;
             
             // throw too close, prompt to do it again
