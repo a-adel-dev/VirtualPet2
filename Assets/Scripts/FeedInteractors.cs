@@ -16,6 +16,7 @@ public class FeedInteractors : MonoBehaviour
     private XRSocketInteractor _interactor;
     private bool _readytoTakeBowl;
     private bool _bowlPlaced;
+    private bool _bonePlaced;
     
     void Start()
     {
@@ -38,9 +39,10 @@ public class FeedInteractors : MonoBehaviour
             _bowlPlaced = true;
             StartCoroutine(WaitABitBeforePrompt());
         }
-        else if (placedObject.CompareTag("bone"))
+        else if (placedObject.CompareTag("bone") && !_bonePlaced)
         {
             animator.SetBool("idle", true);
+            _bonePlaced = true;
             ReplayPanting();
             StartCoroutine(WaitABitBeforePrompt());
         }
