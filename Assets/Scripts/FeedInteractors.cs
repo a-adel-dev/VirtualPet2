@@ -1,5 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 /*
     This script is attached to Snap Socket > SnapSocketTitle > SimpleSocket
@@ -7,63 +10,60 @@ using System.Collections;
 public class FeedInteractors : MonoBehaviour
 {
     [SerializeField] GameObject dog;
-    [SerializeField] GameObject bowl;
-    [SerializeField] GameObject bone;
-    [SerializeField] Transform attachPoint;
     [SerializeField] AudioSource pantingAudio;
     private SequenceHandler sequenceHandler;
-    private int firstTime = 0;
-    private int firstTimeBone = 0;
     private Animator animator;
+    private XRSocketInteractor _interactor;
+    private bool _readytoTakeBowl;
+    private bool _bowlPlaced;
     
     void Start()
     {
         sequenceHandler = dog.GetComponent<SequenceHandler>();
         animator = dog.GetComponent<Animator>();
+        _interactor = GetComponent<XRSocketInteractor>();
+        _interactor.selectEntered.AddListener(OnObjectPlaced);
+        _interactor.selectExited.AddListener(OnObjectRemoved);
     }
     
-    void Update()
+    
+    private void OnObjectPlaced(SelectEnterEventArgs args)
     {
-        if(bowl.transform.position == attachPoint.position && firstTime == 0){
-            // back to sitting 
+        GameObject placedObject = args.interactableObject.transform.gameObject;
+        // Debug.Log($"Object placed: {placedObject}");
+
+        if (placedObject.CompareTag("bowl") && !_bowlPlaced)
+        {
             animator.SetBool("sleep", false);
-
+            _bowlPlaced = true;
             StartCoroutine(WaitABitBeforePrompt());
-            firstTime = 1;
         }
-        if(bone.transform.position == attachPoint.position){
-            // Debug.Log($"First time bone {firstTimeBone}");
-            if(firstTimeBone == 0){
-                // back to sitting 
-                animator.SetBool("idle", true);
-                ReplayPanting();
-                // prompt petting
-                firstTimeBone = 1;
-                StartCoroutine(WaitABitBeforePrompt());
-            }else if(firstTimeBone == 2){
-                // Debug.Log("Second time bone");
-            }
+        else if (placedObject.CompareTag("bone"))
+        {
+            animator.SetBool("idle", true);
+            ReplayPanting();
+            StartCoroutine(WaitABitBeforePrompt());
         }
-        
     }
 
-    private void OnTriggerExit(Collider other) {
-        // Debug.Log($"Exited trigger at {Time.time} pos: {bowl.transform.position}");
-        if(other.gameObject == bowl){
-            if(firstTime == 1){
-                animator.SetBool("eating", false);
-                pantingAudio.Stop();
-                firstTime = 2;
-                StartCoroutine(StopAttack());
-            }
-        }
-        if(other.gameObject == bone){
-            if(firstTimeBone == 1){
-                // Debug.Log("picked up bone");
-                firstTimeBone = 2;
-            }
+    public void SetReadytoTakeBowl()
+    {
+        _readytoTakeBowl = true;
+    }
+    
+    private void OnObjectRemoved(SelectExitEventArgs args)
+    {
+        GameObject removedObject = args.interactableObject.transform.gameObject;
+        // Debug.Log($"Object removed: {removedObject.name}");
+
+        if (removedObject.CompareTag("bowl") && _readytoTakeBowl)
+        {
+            animator.SetBool("eating", false);
+            pantingAudio.Stop();
+            StartCoroutine(StopAttack());
         }
     }
+    
 
     IEnumerator StartEating(){
         yield return new WaitForSeconds(7);
@@ -81,7 +81,6 @@ public class FeedInteractors : MonoBehaviour
     IEnumerator WaitABitBeforePrompt(){
 
         yield return new WaitForSeconds(3);
-
         // prompt petting
         sequenceHandler.PromptPetting();
     }

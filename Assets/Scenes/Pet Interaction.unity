@@ -5401,9 +5401,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dog: {fileID: 1556886654}
-  bowl: {fileID: 703898318}
-  bone: {fileID: 1045339266}
-  attachPoint: {fileID: 1937095169}
   pantingAudio: {fileID: 1840862915}
 --- !u!1 &702586717
 GameObject:
@@ -6496,6 +6493,10 @@ PrefabInstance:
     - target: {fileID: 136868517415886600, guid: aec71f91a8da27d418aa44bd0c543f9b, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.1168
+      objectReference: {fileID: 0}
+    - target: {fileID: 728864242803681389, guid: aec71f91a8da27d418aa44bd0c543f9b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 728864242803681389, guid: aec71f91a8da27d418aa44bd0c543f9b, type: 3}
       propertyPath: m_SocketScaleMode
@@ -17639,6 +17640,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1556886663}
+        m_TargetAssemblyTypeName: SequenceHandler, Assembly-CSharp
+        m_MethodName: SetReadytoTakeBowl
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
