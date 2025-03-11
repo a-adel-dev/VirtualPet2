@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 /*
     This script is attached to XROrigin > Right Hand > Right Hand Interaction Visual > R_Wrist > ColliderBox

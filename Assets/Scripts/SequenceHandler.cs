@@ -45,7 +45,7 @@ public class SequenceHandler : MonoBehaviour
 
     public void IncrementStateIndex(){
         currentStateIndex += 1;
-        DataLogger.Instance.LogData($"Current state: {currentStateIndex}");
+        DataLogger.Instance.LogData($"Current state: {(SequenceNames)currentStateIndex}");
         if (waitingForPetting){
             waitingForPetting = false;
         }

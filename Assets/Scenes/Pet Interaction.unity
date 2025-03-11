@@ -4924,7 +4924,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1556886663}
         m_TargetAssemblyTypeName: SequenceHandler, Assembly-CSharp
-        m_MethodName: IncrementStateIndex
+        m_MethodName: StopPetting
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4936,7 +4936,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1556886663}
         m_TargetAssemblyTypeName: SequenceHandler, Assembly-CSharp
-        m_MethodName: StopPetting
+        m_MethodName: IncrementStateIndex
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
