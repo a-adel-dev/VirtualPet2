@@ -11,16 +11,13 @@ public class GameConfigManager : MonoBehaviour
     [SerializeField] private TMP_Text letterOne;
     [SerializeField] private TMP_Text letterTwo;
     [SerializeField] private TMP_Text letterThree;
-    [SerializeField] private TMP_Text letterFour;
-    [SerializeField] private TMP_Text letterFive;
-    [SerializeField] private TMP_Text letterSix;
     [SerializeField] private Toggle leftHandedToggle;
     [SerializeField] private Toggle activeHapticsToggle;
     [SerializeField] private Toggle passiveHapticsToggle;
 
     public void PopulateGameConfig()
     {
-        GameConfig.Instance.Username = $"{letterOne.text}{letterTwo.text}{letterThree.text}{letterFour.text}{letterFive.text}{letterSix.text}";
+        GameConfig.Instance.Username = $"{letterOne.text}{letterTwo.text}{letterThree.text}";
         GameConfig.Instance.IsLeftHanded = leftHandedToggle.isOn;
         GameConfig.Instance.IsUsingActiveHaptics = activeHapticsToggle.isOn;
         GameConfig.Instance.IsUsingPassiveHaptics = passiveHapticsToggle.isOn;

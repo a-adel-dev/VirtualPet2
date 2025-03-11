@@ -1854,11 +1854,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   letterOne: {fileID: 382027201}
-  letterTwo: {fileID: 0}
-  letterThree: {fileID: 0}
-  letterFour: {fileID: 0}
-  letterFive: {fileID: 0}
-  letterSix: {fileID: 0}
+  letterTwo: {fileID: 1000829258}
+  letterThree: {fileID: 804345772}
   leftHandedToggle: {fileID: 650470825}
   activeHapticsToggle: {fileID: 340397137}
   passiveHapticsToggle: {fileID: 1076925550}
@@ -2379,6 +2376,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 779819447}
   m_CullTransparentMesh: 1
+--- !u!114 &804345772 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7213011512760262150, guid: 0bab5311ba3966c49a59f697410fc435, type: 3}
+  m_PrefabInstance: {fileID: 79623236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &818805599
 GameObject:
   m_ObjectHideFlags: 0
@@ -2687,6 +2695,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5878744656331439722, guid: 0bab5311ba3966c49a59f697410fc435, type: 3}
   m_PrefabInstance: {fileID: 1000829254}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1000829258 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7213011512760262150, guid: 0bab5311ba3966c49a59f697410fc435, type: 3}
+  m_PrefabInstance: {fileID: 1000829254}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1071784861
 PrefabInstance:
   m_ObjectHideFlags: 0
