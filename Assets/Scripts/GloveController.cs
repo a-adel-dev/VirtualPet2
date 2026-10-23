@@ -41,7 +41,14 @@ public class GloveController : MonoBehaviour
         }
     }
 
-    public void StopHapticFeedback(){
-        BhapticsLibrary.StopAll();
+    public void StopHapticFeedback(HandIdentifier hand){
+        if (hand == HandIdentifier.Right)
+        {
+            BhapticsLibrary.StopByEventId("pet_r");
+        }
+        else
+        {
+            BhapticsLibrary.StopByEventId("pet_l");
+        }
     }
 }

@@ -39,7 +39,7 @@ public class HandControl : MonoBehaviour
         if (!sequenceHandler.GetIsWaitingForPetting()) return;
         if(collider.gameObject.CompareTag("dog") && sequenceHandler.GetIsWaitingForPetting())
         {
-            gloveController.StopHapticFeedback();
+            gloveController.StopHapticFeedback(handIdentifier);
             DataLogger.Instance.LogData($"Stopped petting with {gameObject.name} at {collider.gameObject.name}");
         }
     }
